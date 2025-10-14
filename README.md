@@ -2,7 +2,8 @@
 
 An Irssi theme suitable for Gruvbox-terminals.
 
-The theme is developed from a fork of Pipeline.theme. 
+The theme is developed from a fork of Pipeline.theme
+
 (link: https://github.com/hastinbe/irssi-theme-pipeline)
 
   License: GNU General Public License v2
@@ -39,62 +40,52 @@ Within the window list the activity level changes color and/or shows an icon whe
 
 ### Items are arranged within each window as follows. 
 
- Statusbar: topic
- Type	   : root  
- Placement: top
- Position : 1
- Visible  : always
- Items    : Name                                Priority  Alignment
-          : topicbarstart                       100       left
-          : separator_2                         10        left
-          : topic                               0         left
-          : topic_empty                         0         left
-          : topicbarend                         100       right
+- Statusbar: topic
+- Type	   : root  
+- Placement: top
+- Position : 1
+- Visible  : always
+- Items    : Name                                Priority  Alignment
+  - : topicbarstart                       100       left
+  - : separator_2                         10        left
+  - : topic                               0         left
+  - : topic_empty                         0         left
+  - : topicbarend                         100       right
 
 ## EXPLANATION: 
-       The topic bar consists of the standard elements plus an added
-       separator_2 item from the script sb_separator.pl. 
-       The separator_2 item provides a graphic element + icon in the
-       topic bar. 
+The topic bar consists of the standard elements plus an added separator_2 item from the script sb_separator.pl. 
+The separator_2 item provides a graphic element + icon in the topic bar. 
 
- Statusbar: window
- Type     : window
- Placement: bottom
- Position : 0
- Visible  : always
- Items    : Name                                Priority  Alignment
-          : barstart                            100       left
-          : separator                           0         left
-          : user                                0         left
-          : usercount                           0         right
-          : barend                              100       right
+- Statusbar: window
+- Type     : window
+- Placement: bottom
+- Position : 0
+- Visible  : always
+- Items    : Name                                Priority  Alignment
+  - : barstart                            100       left
+  - : separator                           0         left
+  - : user                                0         left
+  - : usercount                           0         right
+  - : barend                              100       right
 
 ## EXPLANATION: 
-       Due to the way I had to configure the status bar layout I could
-       use a standard method of applying a " " to the left of user wit
-       variables 'sb' or 'sbstart' without getting unwanted graphic ef
-       on the window list in awl_x bars. Therefore I added a simple se
-       item first. 
-       User item is standard. Usercount stems from the script usercoun
-       and is aligned to the right. 
-       To maintain the layout of this status bar it's at this point no
-       possible to add for example 'time' item. 
+Due to the way I had to configure the status bar layout I could use a standard method of applying a " " to the left of user with variables 'sb' or 'sbstart' without getting unwanted graphic effects on the window list in awl_x bars. Therefore I added a simple separator item first. 
+User item is standard. Usercount stems from the script usercount and is aligned to the right. 
+To maintain the layout of this status bar it's at this point not possible to add for example 'time' item. 
 
- Statusbar: awl_0
- Type     : root
- Placement: bottom
- Position : 0
- Visible  : always
- Items    : Name                                Priority  Alignment
-          : barstart                            100       left
-          : awl_0                               0         left
-          : barend                              100       right
+- Statusbar: awl_0
+- Type     : root
+- Placement: bottom
+- Position : 0
+- Visible  : always
+- Items    : Name                                Priority  Alignment
+  - : barstart                            100       left
+  - : awl_0                               0         left
+  - : barend                              100       right
 
 ## EXPLANATION: 
-       This is the standard adv_windowlist.pl way of showing channels 
-       windows on a non-tmux / screen terminal. If you use tmux / scre
-       then switch to statusbar mode with the command '/toggle awl_vie
-       The awl_x windows expand and shrink depending on your screen wi
-       and number of channels.
+This is the standard adv_windowlist.pl way of showing channels windows on a non-tmux / screen terminal. If you use tmux / screen then switch to statusbar mode with the command '/toggle awl_viewer'
+The awl_x windows expand and shrink depending on your screen width and number of channels.
+
 
 Please use this theme as you find suitable and do not hesitate to make your own fork of it. Please share suggestions and/or ideas either on GitHub or via e-mail: bjorn@forndata.org.
