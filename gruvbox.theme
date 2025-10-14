@@ -1,0 +1,399 @@
+######################################################################
+#                       gruvbox-irssi.theme                          #
+######################################################################
+#
+#  An Irssi theme suitable for Gruvbox-terminals.
+#
+#  The theme is developed from a fork of Pipeline.theme. 
+#  (link: https://github.com/hastinbe/irssi-theme-pipeline)
+#
+#  License: GNU General Public License v2
+#
+#  Author: Björn Sundberg <bjorn@forndata.org>
+#  Web: https://www.thisoldcabin.net/irssi
+#  GitHub: https://github.com/hravnkel/gruvbox-irssi
+#
+#  Takes use of the following scripts: 
+#   - adv_windowlist.pl
+#   - usercount.pl
+#   - sb_separator.pl
+#
+#  A Nerd Font is also mandatory for icons and status bar design. 
+#
+#  Notes: 
+#  A lot of this theme uses original.theme without changes. Many such 
+#  variables are located at the bottom of the theme for convenience
+#  and added readability. 
+#
+#  Nicknames in channels: 
+#  The way nicknames in chats are displayed stems from Pipeline.theme
+#  by Beau Hastings. 
+#
+#  Channel hides: 
+#  I personally like a decluttered IRC environment and therefore hide
+#  a lot of activity. My preferred setting is: 
+#  /window hidelevel JOINS PARTS QUITS NICKS HIDDEN
+#  Since the theme relies on providing info about channel activity
+#  you should probably consider hiding at least some activity to get
+#  a good user experience. 
+#
+#  Status bar configuration: 
+#  This theme uses three separate status bars: topic, window and 
+#  awl_x for adv_windowlist.
+#
+#  Within the window list the activity level changes color and/or
+#  shows an icon when: 
+#  - non message text appears
+#  - someone writes a message
+#  - a highlighted message appears
+#
+#  Items are arranged within each window as follows. 
+#
+# Statusbar: topic
+# Type	   : root  
+# Placement: top
+# Position : 1
+# Visible  : always
+# Items    : Name                                Priority  Alignment
+#          : topicbarstart                       100       left
+#          : separator_2                         10        left
+#          : topic                               0         left
+#          : topic_empty                         0         left
+#          : topicbarend                         100       right
+#
+### EXPLANATION: 
+#       The topic bar consists of the standard elements plus an added
+#       separator_2 item from the script sb_separator.pl. 
+#       The separator_2 item provides a graphic element + icon in the
+#       topic bar. 
+#
+# Statusbar: window
+# Type     : window
+# Placement: bottom
+# Position : 0
+# Visible  : always
+# Items    : Name                                Priority  Alignment
+#          : barstart                            100       left
+#          : separator                           0         left
+#          : user                                0         left
+#          : usercount                           0         right
+#          : barend                              100       right
+#
+### EXPLANATION: 
+#       Due to the way I had to configure the status bar layout I couldn't
+#       use a standard method of applying a " " to the left of user with 
+#       variables 'sb' or 'sbstart' without getting unwanted graphic effects
+#       on the window list in awl_x bars. Therefore I added a simple separator
+#       item first. 
+#       User item is standard. Usercount stems from the script usercount.pl
+#       and is aligned to the right. 
+#       To maintain the layout of this status bar it's at this point not
+#       possible to add for example 'time' item. 
+#
+# Statusbar: awl_0
+# Type     : root
+# Placement: bottom
+# Position : 0
+# Visible  : always
+# Items    : Name                                Priority  Alignment
+#          : barstart                            100       left
+#          : awl_0                               0         left
+#          : barend                              100       right
+#
+### EXPLANATION: 
+#       This is the standard adv_windowlist.pl way of showing channels and
+#       windows on a non-tmux / screen terminal. If you use tmux / screen
+#       then switch to statusbar mode with the command '/toggle awl_viewer'.
+#       The awl_x windows expand and shrink depending on your screen width
+#       and number of channels.
+#
+##########################################################################
+# Please use this theme as you find suitable and do not hesitate to make #
+# your own fork of it. Please share suggestions and/or ideas either on   #
+# GitHub or via e-mail: bjorn@forndata.org.                              # 
+##########################################################################
+
+replaces = { "/[]=" = "%K$*%n"; "*@+." = "%B$*%n"; };
+
+info_eol = "false";
+
+abstracts = {
+
+  ##
+  ## generic
+  ##
+
+  # text to insert at the beginning of each non-message line
+  line_start = "%K...%n ";
+
+  # timestamp styling
+  timestamp = "%B$*%n";
+
+  # any kind of text that needs hilighting
+  hilight = "%9$*%9";
+
+  # any kind of error message
+  error = "%R$*%n";
+
+  # channel name is printed
+  channel = "%9$*%9";
+
+  # nick is printed
+  nick = "$*";
+
+  # nick host is printed
+  nickhost = "$*";
+
+  # server name is printed
+  server = "%9$*%9";
+
+  # some kind of comment is printed
+  comment = "%b[%n$*%b]%n";
+
+  # reason for something is printed (part, quit, kick, ..)
+  reason = "{comment %_$*%_}";
+
+  # mode change is printed ([+o nick])
+  mode = "%b$*%n";
+
+  ##
+  ## channel specific messages
+  ##
+
+  # highlighted nick/host is printed (joins)
+  channick_hilight = "$*";
+  chanhost_hilight = "{nickhost $*}";
+
+  # nick/host is printed (parts, quits, etc.)
+  channick = "%W$*%n";
+  chanhost = "{nickhost $*}";
+
+  # highlighted channel name is printed
+  channelhilight = "%g$*%n";
+
+  # ban/ban exception/invite list mask is printed
+  ban = "%r$*%n";
+
+  ##
+  ## messages
+  ##
+
+  # the basic styling of how to print message, $0 = nick mode, $1 = nick
+  msgnick = "%g$0$1%K |%n %|";
+
+  # message from you is printed. 
+  # $0 = nick mode, $1 = nick
+  ownmsgnick = "{msgnick $0 $1-}%W";
+  ownnick = "%y$*%n";
+
+  # public message in channel, $0 = nick mode, $1 = nick
+  pubmsgnick = "{msgnick %b$0%n %g$1%n}";
+  pubnick = "%g$*%n";
+
+  # public message in channel meant for me, $0 = nick mode, $1 = nick
+  #pubmsgmenick = "%Y{msgnick %B$0%n %w$1%n}%w";
+  pubmsgmenick = "{msgnick $0$1-}";
+  menick = "%g$*%n";
+
+  # public highlighted message in channel
+  # $0 = highlight color, $1 = nick mode, $2 = nick
+  #pubmsghinick = "%Y{msgnick %B$1 %w$2}%w";
+  pubmsghinick = "{msgnick $1 $0$2-%n}";
+
+  # channel name is printed with message
+  msgchannel = "%b:$*%n";
+
+  # private message, $0 = nick, $1 = host
+  #privmsg = "%b.%c.%C.%n(%c$0%n[%c$1]) ";
+  privmsg = "[%w$0!%b$1-%n] ";
+
+  # private message from you, $0 = "msg", $1 = target nick
+  #ownprivmsg = "%b.%c.%C.%n[%cmsg%n(%c$1%n)] ";
+  ownprivmsg = "{msgnick  $*}";
+
+  # own private message in query
+  ownprivmsgnick = "{msgnick %W$*%w}";
+  ownprivnick = "%W$0%n%w";
+
+  # private message in query
+  privmsgnick = "{msgnick %B$*%w}";
+
+  ##
+  ## Actions (/ME stuff)
+  ##
+
+  # used internally by this theme
+  action_core = "%W*%w $*%n";
+
+  # generic one that's used by most actions
+  action = "%w{action_core %w$*} ";
+
+  # own action, both private/public
+  ownaction = "{action $*}";
+
+  # own action with target, both private/public
+  ownaction_target = "{action_core $0}%K:%b$1%n ";
+
+  # private action sent by others
+  pvtaction = "%w $*%n ";
+  pvtaction_query = "{action $*}";
+
+  # public action sent by others
+  pubaction = "{action $*}";
+
+  ##
+  ## statusbars
+  ##
+
+  # background of statusbars
+  # The theme relies on topic and window statusbars being styled
+  # different from the general background and implements a Gruvbox
+  # grey color. 
+
+  sb_background = "%0";
+  sb_window_bg = "%z3C3836";
+  sb_topic_bg = "%z3C3836";
+
+  prompt = "%w$*%n%B:%W ";
+
+  # default statusbar item style
+  sb = "%7%k$* %n";
+  sbmode = " %4%w %k+$* %b%z3C3836";
+  sbaway = " (%Baway%n)";
+
+  # servertag is currently not in use, feel free to experiment with
+  # settings for that if you'd like to implement it. There are a few
+  # obstacles to handle before it works with the design so I've
+  # left it out for now. 
+  sbservertag = "%g%2 %k$0 %w%7";
+  sbmore = "%_-- more --%_";
+  sblag = "{sb L: %B$*}";
+  sbmail = "{sb M: $*}";
+
+  sbstart = "";
+  sbend = "";
+
+  # Not in use either. 
+  topicsbstart = "{sbstart $*}";
+  topicsbend = "{sbend $*}";
+
+  # The sb_act_* variables describe the channels in awl_x windows.
+  # They provide an icon and color depending on what kind of 
+  # activity happening in the channel. 
+  sb_act_hilight = "%9%Y $*%n";
+  sb_act_hilight_color = "%9%Y $*%n";
+  sb_act_text = "%K󰦨 %W$*%n";
+  sb_act_msg = "%y $*%n";
+
+  # usercount layout with icons.
+  sb_usercount = "{sb%z3C3836 %y%k%3  $0 $1-}";
+  sb_uc_ircops = "  $*";
+  sb_uc_ops = " 󰆥 $*";
+  sb_uc_halfops = " 󰞀 $*";
+  sb_uc_voices = "  $*";
+  sb_uc_normal = "  $* ";
+  sb_uc_space = " ";
+
+  # sbseparator config. The first separator is used to provide
+  # an extra space before item user in the statusbar 'window'. 
+  # The second separator is used to provide an icon in the topic
+  # bar. The third separator isn't used in this config. 
+  sb_separator = "%7";
+  sb_separator_2 = "%7%k    %z3C3836%w%n";
+  sb_separator_3 = ":";
+
+};
+
+# A number of formats inherited from the Pipeline.theme. 
+
+# %r%n%_$0%_$1%K |%n %|
+formats = {
+  "fe-common/core" = {
+    pubmsg = "{pubmsgnick $2 {pubnick $[-16]0}}$1";
+    join = "             %_%Bjoin%_%K |%n %g{channick_hilight $0}%K!%n{chanhost_hilight $1}";
+    part = "             %_%Bpart%_%K |%n %W{channick $0}%K!%n{chanhost $1}: {reason $3}";
+    kick = "             %_%Bkick%_%K |%n %r{channick $0} %nby {nick $2} from {channel $1}: {reason $3}";
+    quit = "             %_%Bquit%_%K |%n %W{channick $0}%K!%n{chanhost $1}: {reason $2}";
+    nick_changed = "             %_%Bnick%_%K |%n {nick %w$0%n} %Nis now {nick %W$1%n}";
+    endofnames = "{channel $0}: {hilight $1} nicks ({comment @/{hilight $2} +/{hilight $3}  -/{hilight $4}})";
+    own_msg = "{ownmsgnick $2 {ownnick $[-16]0}}$1";
+    own_msg_channel = "{ownmsgnick $3 {ownnick $[-16]0}{msgchannel $1}}$2";
+    pubmsg_me = "{pubmsgmenick $2 {menick $[-16]0}}$1";
+    pubmsg_me_channel = "{pubmsgmenick $3 {menick $[-16]0}{msgchannel $1}}$2";
+    pubmsg_hilight = "{pubmsghinick $0 $3 $[-16]1}$2";
+    pubmsg_channel = "{pubmsgnick $3 {pubnick $[-16]0}{msgchannel $1}}$2";
+    chanmode_change = "             %_%Bmode%_%K |%n {$channel $0} %W{channick_hilight $2} %nsets mode %B{$mode $1}";
+    channel_mode = "             %_%Bmode%_%K |%n {$channel $0} %W{channick_hilight $2} %nsets mode %B{$mode $1}";
+  };
+  "fe-common/text" = { window_info_sticky = "%#  Sticky  : $0"; };
+  "fe-common/irc" = {
+    chanmode_change = "             %_%Bmode%_%K |%n %y{channick_hilight $2} %nsets mode %b{$mode $1} %non {$channelhilight $0}";
+    whois = "{hilight $0} [{nickhost $1@$2}] [$whois_country]%: ircname  : $3";
+    server_chanmode_change = "{netsplit ServerMode}/{channelhilight $0}: {mode $1} by {nick $2}";
+    whois_server = " server   : $1 ({comment $2})";
+    own_action = "{ownaction  $0}%|$1";
+    action_public = "{pubaction  $0}%|$1";
+  };
+
+  # Config for adv_windowlist script. If you have trouble configuring
+  # the script through this theme, set the variables from within Irssi
+  # with /format awl_display_key "%0 %g$Q%K|%n$H$C$S" etc. 
+
+  "Irssi::Script::adv_windowlist" = {
+    awl_display_key = "%0 %g$Q%K|%n$H$C$S";
+    awl_display_nokey = "%0 %g$Q%K|%n$H$C$S";
+    awl_display_key_active = "%0 %g$Q%K|%z3D4220%W$C%n";
+    awl_display_header = "";
+  };
+
+
+  ####################################################################
+  # This section contains unaltered configuration from default.theme #
+  ####################################################################
+
+  ##
+  ## other IRC events
+  ##
+
+  # notices
+  ownnotice = "%b>%c>%C> %c$0%B!%c$1%n: ";
+  notice = "%b$*%n ";
+  pubnotice_channel = "%K:%m$*";
+  pubnotice_host = "%K(%m$*%K)";
+  servernotice = "%g!$*%n ";
+
+  # CTCPs
+  ownctcp = "%b>%c>%C> %c$0%B!%c$1%n: ";
+  ctcp = "%m$*%n";
+
+  # wallops
+  wallop = "%W$*%n: ";
+  wallop_nick = "%n$*";
+  wallop_action = "%W * $*%n ";
+
+  # netsplits
+  netsplit = "%B$*%n";
+  netjoin = "%B$*%n";
+
+  # /names list
+  names_nick = "[%_$0%_%w$1-%n] ";
+  names_users = "%b$*%n:";
+  names_channel = "%B$*%n";
+
+  # DCC
+  dcc = "%b$*%n";
+  dccfile = "%_$*%_";
+
+  # DCC chat, own msg/action
+  dccownmsg = "[%b$0%K($1-%K)%n] ";
+  dccownnick = "%B$*%n";
+  dccownaction = "{action $*}";
+  dccownaction_target = "{action_core $0}%K:%b$1%n ";
+
+  # DCC chat, others
+  dccmsg = "[%B$1-%K(%b$0%K)%n] ";
+  dccquerynick = "%B$*%n";
+  dccaction = "%W (*dcc*) $*%n %|";
+
+
+};
