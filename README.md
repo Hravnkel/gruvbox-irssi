@@ -52,7 +52,7 @@ Within the window list the activity level changes color and/or shows an icon whe
   - : topic_empty                         0         left
   - : topicbarend                         100       right
 
-## EXPLANATION: 
+### EXPLANATION: 
 The topic bar consists of the standard elements plus an added separator_2 item from the script sb_separator.pl. 
 The separator_2 item provides a graphic element + icon in the topic bar. 
 
@@ -68,7 +68,7 @@ The separator_2 item provides a graphic element + icon in the topic bar.
   - : usercount                           0         right
   - : barend                              100       right
 
-## EXPLANATION: 
+### EXPLANATION: 
 Due to the way I had to configure the status bar layout I could use a standard method of applying a " " to the left of user with variables 'sb' or 'sbstart' without getting unwanted graphic effects on the window list in awl_x bars. Therefore I added a simple separator item first. 
 User item is standard. Usercount stems from the script usercount and is aligned to the right. 
 To maintain the layout of this status bar it's at this point not possible to add for example 'time' item. 
@@ -83,7 +83,7 @@ To maintain the layout of this status bar it's at this point not possible to add
   - : awl_0                               0         left
   - : barend                              100       right
 
-## EXPLANATION: 
+### EXPLANATION: 
 This is the standard adv_windowlist.pl way of showing channels windows on a non-tmux / screen terminal. If you use tmux / screen then switch to statusbar mode with the command '/toggle awl_viewer'
 The awl_x windows expand and shrink depending on your screen width and number of channels.
 
