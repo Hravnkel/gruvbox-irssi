@@ -8,9 +8,9 @@ The theme is developed from a fork of Pipeline.theme
 
   License: GNU General Public License v2
 
-  Author: Björn Sundberg <bjorn@forndata.org>
-  Web: https://www.thisoldcabin.net/irssi
-  GitHub: https://github.com/hravnkel/gruvbox-irssi
+  - Author: Björn Sundberg <bjorn@forndata.org>
+  - Web: https://www.thisoldcabin.net/irssi
+  - GitHub: https://github.com/hravnkel/gruvbox-irssi
 
 Takes use of the following scripts: 
    - adv_windowlist.pl
